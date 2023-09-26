@@ -16,16 +16,45 @@ jobRole.addEventListener('change', (e) => {
     }
 });
 
-//
-var design = document.getElementById('design');
-var color = document.getElementById('color');
-color.disabled = true;
+//when user selects design color option correlate with relevant design
+var design = document.getElementById("design");
+var color = document.getElementById("color");
+var colorOptions = document.querySelectorAll("option[data-theme]")
+
+for (let i = 0; i < colorOptions.length; i++){
+    colorOptions[i].disabled = true;
+}
 
 design.addEventListener('change', (e) => {
-    const selectDesign = design.value
-    color.disabled = true;
-    designValue = e.target.value
-    option = document.getAttribute('option')
-    console.log(designValue)
-    // for (){}
+    
+    for (let i = 0; i < colorOptions.length; i++){
+        if (design.value === colorOptions[i].getAttribute("data-theme")){
+            colorOptions[i].disabled = false;
+        }else{
+            colorOptions[i].disabled = true;
+        }
+    }
+});
+
+// when user selects certain payment method those related form inputs will appear
+var paymentSelect= document.getElementById("payment");
+var creditCard= document.getElementById("credit-card");
+var payPal = document.getElementById("paypal");
+var bitCoin = document.getElementById("bitcoin");
+
+payPal.style.display = "none";
+bitCoin.style.display = "none";
+
+paymentSelect.addEventListener('change',(e) => {
+    payPal.style.display = "none";
+    bitCoin.style.display = "none";
+    creditCard.style.display = "none";
+
+    if (e.target.value === 'credit-card') {
+        creditCard.style.display = "block";
+    } else if (e.target.value === 'paypal'){
+            payPal.style.display = "block";
+        }else if (e.target.value === 'bitcoin'){ 
+            bitCoin.style.display = "block";
+        }
 });
