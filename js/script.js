@@ -118,12 +118,55 @@ form.addEventListener('submit', (e) => {
     var validEmail = isEmailValid(emailAddress.value);
     var validActivity = isActivityValid(checkBoxOptions);
     var validCard = isCardValid(cvv.value, zipCode.value, cardNumber.value);
-
-    if (!validName || validName === "" || !validActivity || !validEmail || !validCard){
+    //check name validation
+    if (!validName || validName === ""){
         e.preventDefault();
-        alert("Please fill out required fields");
-    };
-
+        validName.parentElement.classList.add("error-border", "not-valid");
+        validName.querySelector('.name-hint').style.display = 'block';
+    } else {
+        validName.parentElement.classList.remove("error-border", "not-valid");
+        validName.parentElement.querySelector('.name-hint').style.display = 'none';
+  }
+    //check activity validation
+    if (!validActivity){
+        e.preventDefault();
+        validActivity.parentElement.classList.add("error-border", "not-valid");
+        validActivity.querySelector('.activities-hint').style.display = 'block';
+    } else {
+        validActivity.parentElement.classList.remove("error-border", "not-valid");
+        validActivity.parentElement.querySelector('.activities-hint').style.display = 'none';
+  };
+    //check email validation
+    if (!validEmail){
+        e.preventDefault();
+        validEmail.parentElement.classList.add("error-border", "not-valid");
+        validEmail.querySelector('.email-hint').style.display = 'block';
+    } else {
+        validEmail.parentElement.classList.remove("error-border", "not-valid");
+        validEmail.parentElement.querySelector('.email-hint').style.display = 'none';
+  };
+    //check card validation
+    if (!validCard){
+        e.preventDefault();
+        validCard.parentElement.classList.add("error-border", "not-valid");
+        validCard.querySelector('.cc-hint').style.display = 'block';
+    } else {
+        validCard.parentElement.classList.remove("error-border", "not-valid");
+        validCard.parentElement.querySelector('.cc-hint').style.display = 'none';
+  }
 });
 
+// when user enters invalid information they are given accessible user feedback
 
+var checkBoxInput = registerActivities.querySelectorAll('input[type= "checkbox"]')
+
+for (let i=0;i< checkBoxInput.length;i++){
+    checkBoxInput[i].addEventListener('focus',(e) =>  {
+        parent = e.target.parentElement;
+        parent.classList.add('focused')
+    });
+    checkBoxInput[i].addEventListener('blur',(e) => {
+        parent = e.target.parentElement;
+        parent.classList.remove('focused')
+    });
+}
