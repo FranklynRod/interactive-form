@@ -58,3 +58,72 @@ paymentSelect.addEventListener('change',(e) => {
             bitCoin.style.display = "block";
         }
 });
+// when user selects activity cost is added to total. When activity is deselected cost is removed from total.
+var registerActivities = document.getElementById("activities");
+var activitiesCost = document.getElementById("activities-cost");
+var checkBox = registerActivities.querySelectorAll("input[type='checkbox']")
+
+let totalCost = 0;
+
+registerActivities.addEventListener('change',(e) => {
+    var costOption = parseInt(e.target.getAttribute("data-cost"));
+
+    if (e.target.checked){
+        totalCost += costOption;
+    }else{
+        totalCost -= costOption;
+    }
+    activitiesCost.textContent = `Total: $${totalCost}`;
+});
+
+activitiesCost.textContent = `Total: $0`;
+
+// when user must enter data into input fields according valid rules or else they will be unable to submit form
+
+var nameId = document.getElementById("name");
+var emailAddress = document.getElementById("email");
+var registerActivities = document.getElementById("activities");
+var cardNumber = document.getElementById("cc-num");
+var zipCode =  document.getElementById("zip");
+var cvv =  document.getElementById("cvv");
+var form = document.querySelector("form");
+var paymentSelection = document.getElementById("payment")
+var checkBoxOptions = registerActivities.querySelectorAll('input[type= "checkbox"]')
+
+
+const isNameValid = (nameId) => {
+    return /[A-Za-z]+$/.test(nameId);
+ }
+
+ const isEmailValid = (emailAddress) => {
+    return /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailAddress);
+ }
+const isCardValid = (cvv, zipCode, cardNumber) => {
+    if(paymentSelection.value === "credit-card"){
+        const cardNumberValidation = /^[0-9]{13,16}$/.test(cardNumber);
+        const cvvValidation = /^[0-9]{3}$/.test(cvv);
+        const zipCodeValidation = /^[0-9]{5}$/.test(zipCode);
+
+        return cardNumberValidation && cvvValidation && zipCodeValidation;
+    }
+    
+};
+
+const isActivityValid = (checkBoxOptions) => {
+    return checkBoxOptions.some((checkbox) => checkbox.checked)
+};
+
+form.addEventListener('submit', (e) => {
+    var validName = isNameValid(nameId.value);
+    var validEmail = isEmailValid(emailAddress.value);
+    var validActivity = isActivityValid(checkBoxOptions);
+    var validCard = isCardValid(cvv.value, zipCode.value, cardNumber.value);
+
+    if (!validName || validName === "" || !validActivity || !validEmail || !validCard){
+        e.preventDefault();
+        alert("Please fill out required fields");
+    };
+
+});
+
+
