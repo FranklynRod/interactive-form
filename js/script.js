@@ -91,32 +91,32 @@ var checkBoxOptions = document.querySelectorAll('input[type= "checkbox"]')
 
 
 const isNameValid = (nameId) => {
-    return /^[\S\s]+[\S]+$/i.test(nameId.value);
+    return /^[\S\s]+[\S]+$/i.test(nameId);
  }
 
 const isEmailValid = (emailAddress) => {
-    return /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailAddress.value);
+    return /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailAddress);
  }
 
 const isCardNumberValid = (cardNumber) => {
     if(paymentSelection.value === "credit-card"){
-        return /^[0-9]{13,16}$/.test(cardNumber.value);
+        return /^[0-9]{13,16}$/.test(cardNumber);
     }
 };
 
 const isCVVValid = (cvv) => {
     if(paymentSelection.value === "credit-card"){
-        return /^[0-9]{3}$/.test(cvv.value);
+        return /^[0-9]{3}$/.test(cvv);
     }
 };
 
 const isZipCodeValid = (zipCode) => {
     if(paymentSelection.value === "credit-card"){
-        return  /^[0-9]{5}$/.test(zipCode.value);
+        return  /^[0-9]{5}$/.test(zipCode);
     }
 };
-const isActivityValid = (checkBoxOptions) => {
-    return checkBoxOptions.some((checkbox) => checkbox.checked)
+const isActivityValid = (totalCost) => {
+    return totalCost > 0 ;
 };
 
 form.addEventListener("submit", (e) => {
@@ -139,7 +139,7 @@ form.addEventListener("submit", (e) => {
         validator(cardNumber, isCardNumberValid);
         validator(zipCode, isZipCodeValid);
         validator(cvv, isCVVValid);
-        validator(checkBoxOptions, isActivityValid);
+        validator(activitiesCost, isActivityValid);
 });
 
 // when user enters invalid information they are given accessible user feedback
