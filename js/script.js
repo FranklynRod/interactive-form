@@ -80,7 +80,7 @@ registerActivities.addEventListener('change',(e) => {
 
 activitiesCost.textContent = `Total: $0`;
 
-// when user must enter data into input fields according valid rules or else they will be unable to submit form
+// when user must enter data into input fields according to valid rules or else they will be unable to submit form
 var emailAddress = document.getElementById("email");
 var cardNumber = document.getElementById("cc-num");
 var zipCode =  document.getElementById("zip");
@@ -144,7 +144,7 @@ form.addEventListener("submit", (e) => {
 
 // when user enters invalid information they are given accessible user feedback
 var checkBoxInputs = document.querySelectorAll('input[type= "checkbox"]')
-
+ 
 for (let i=0;i< checkBoxInputs.length;i++){
     checkBoxInputs[i].addEventListener("focus",(e) =>  {
         parent = checkBoxInputs[i].parentElement;
