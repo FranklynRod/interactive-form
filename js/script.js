@@ -65,7 +65,7 @@ var registerActivities = document.getElementById("activities");
 var activitiesCost = document.getElementById("activities-cost");
 var checkBox = registerActivities.querySelectorAll("input[type='checkbox']")
 
-let totalCost = 0;
+var totalCost = 0;
 
 registerActivities.addEventListener('change',(e) => {
     var costOption = parseInt(e.target.getAttribute("data-cost"));
@@ -76,7 +76,9 @@ registerActivities.addEventListener('change',(e) => {
         totalCost -= costOption;
     }
     activitiesCost.textContent = `Total: $${totalCost}`;
+    console.log(totalCost)
 });
+
 
 activitiesCost.textContent = `Total: $0`;
 
@@ -115,7 +117,7 @@ const isZipCodeValid = (zipCode) => {
         return  /^[0-9]{5}$/.test(zipCode);
     }
 };
-const isActivityValid = (totalCost) => {
+const isActivityValid = () => {
     return totalCost > 0 ;
 };
 
